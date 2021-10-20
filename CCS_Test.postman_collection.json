@@ -1,0 +1,3956 @@
+{
+	"info": {
+		"_postman_id": "14f4f1fd-3afc-4b4d-80e2-591c3308d7b7",
+		"name": "CCS_Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Store",
+			"item": [
+				{
+					"name": "Delete - first time access token",
+					"item": [
+						{
+							"name": "Store1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.collectionVariables.set(\"store1_id\",store_response.id);\r",
+											"pm.collectionVariables.set(\"store1_accessToken\",store_response.accessToken);\r",
+											"\r",
+											"\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"accessToken\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"itemName\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"    \r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello.txt"
+										},
+										{
+											"key": "itemName",
+											"value": "store1",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "storageGroup",
+											"value": "Aws",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "targetApplicationName",
+											"value": "Connect",
+											"type": "text"
+										},
+										{
+											"key": "targetReferenceId",
+											"value": "{{$guid}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file?force=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file"
+									],
+									"query": [
+										{
+											"key": "force",
+											"value": "true",
+											"description": "If true then this file will be updated even if it still matches the original."
+										}
+									]
+								},
+								"description": "Stores a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "Store2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.collectionVariables.set(\"store2_accessToken\",store_response.accessToken);\r",
+											"\r",
+											"\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"accessToken\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"itemName\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"    \r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello.txt"
+										},
+										{
+											"key": "itemName",
+											"value": "store1",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "storageGroup",
+											"value": "Aws",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "targetApplicationName",
+											"value": "Connect",
+											"type": "text"
+										},
+										{
+											"key": "targetReferenceId",
+											"value": "{{$guid}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file?force=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file"
+									],
+									"query": [
+										{
+											"key": "force",
+											"value": "true",
+											"description": "If true then this file will be updated even if it still matches the original."
+										}
+									]
+								},
+								"description": "Stores a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete-First_time_access_token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"const store_response = pm.response.json();\r",
+											"pm.test(\"Validate Status Code is 401\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(401);\r",
+											"    pm.expect(store_response).have.property(\"errorCode\");\r",
+											"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+											"    pm.expect(store_response).have.property(\"errorCode\").is.to.equal(\"unauthorized\"); \r",
+											"    pm.expect(store_response).have.property(\"errorMessage\").is.to.equal(\"Access token provided does not match for this file\"); \r",
+											"\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "(Required) The accessToken for the file that was returned during storage",
+										"key": "x-file-access-token",
+										"value": "{{store1_accessToken}}"
+									},
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/file/{{store1_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file",
+										"{{store1_id}}"
+									]
+								},
+								"description": "Deletes a file from the storage service."
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Delete - second time access token",
+					"item": [
+						{
+							"name": "Store1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.collectionVariables.set(\"store1_id\",store_response.id);\r",
+											"pm.collectionVariables.set(\"store1_accessToken\",store_response.accessToken);\r",
+											"\r",
+											"\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"accessToken\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"itemName\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"    \r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello.txt"
+										},
+										{
+											"key": "itemName",
+											"value": "store_del",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "storageGroup",
+											"value": "Aws",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "targetApplicationName",
+											"value": "Connect",
+											"type": "text"
+										},
+										{
+											"key": "targetReferenceId",
+											"value": "{{$guid}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file?force=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file"
+									],
+									"query": [
+										{
+											"key": "force",
+											"value": "true",
+											"description": "If true then this file will be updated even if it still matches the original."
+										}
+									]
+								},
+								"description": "Stores a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "Store2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.collectionVariables.set(\"store2_accessToken\",store_response.accessToken);\r",
+											"\r",
+											"\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"accessToken\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"itemName\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"    \r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello.txt"
+										},
+										{
+											"key": "itemName",
+											"value": "store_del",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "storageGroup",
+											"value": "Aws",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "targetApplicationName",
+											"value": "Connect",
+											"type": "text"
+										},
+										{
+											"key": "targetReferenceId",
+											"value": "{{$guid}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file?force=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file"
+									],
+									"query": [
+										{
+											"key": "force",
+											"value": "true",
+											"description": "If true then this file will be updated even if it still matches the original."
+										}
+									]
+								},
+								"description": "Stores a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete-Second_time_access_token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"const store_response = pm.response.json();\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"version\"); \r",
+											"    pm.expect(store_response).have.property(\"lastUpdateDateTime\"); \r",
+											"    pm.expect(store_response).have.property(\"contentType\"); \r",
+											"    pm.expect(store_response).have.property(\"checksum\"); \r",
+											"\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "(Required) The accessToken for the file that was returned during storage",
+										"key": "x-file-access-token",
+										"value": "{{store2_accessToken}}"
+									},
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/file/{{store1_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file",
+										"{{store1_id}}"
+									]
+								},
+								"description": "Deletes a file from the storage service."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Store - Delete - Store - Check Verison Number",
+					"item": [
+						{
+							"name": "Store1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.collectionVariables.set(\"store1_id\",store_response.id);\r",
+											"pm.collectionVariables.set(\"store1_accessToken\",store_response.accessToken);\r",
+											"\r",
+											"\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"accessToken\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"itemName\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"    \r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello.txt"
+										},
+										{
+											"key": "itemName",
+											"value": "store_ver",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "storageGroup",
+											"value": "Aws",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "targetApplicationName",
+											"value": "Connect",
+											"type": "text"
+										},
+										{
+											"key": "targetReferenceId",
+											"value": "{{$guid}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file?force=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file"
+									],
+									"query": [
+										{
+											"key": "force",
+											"value": "true",
+											"description": "If true then this file will be updated even if it still matches the original."
+										}
+									]
+								},
+								"description": "Stores a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "Store2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.collectionVariables.set(\"store2_accessToken\",store_response.accessToken);\r",
+											"\r",
+											"\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"accessToken\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"itemName\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"    \r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello.txt"
+										},
+										{
+											"key": "itemName",
+											"value": "store_ver",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "storageGroup",
+											"value": "Aws",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "targetApplicationName",
+											"value": "Connect",
+											"type": "text"
+										},
+										{
+											"key": "targetReferenceId",
+											"value": "{{$guid}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file?force=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file"
+									],
+									"query": [
+										{
+											"key": "force",
+											"value": "true",
+											"description": "If true then this file will be updated even if it still matches the original."
+										}
+									]
+								},
+								"description": "Stores a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete-Second_time_access_token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"const store_response = pm.response.json();\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"version\"); \r",
+											"    pm.expect(store_response).have.property(\"lastUpdateDateTime\"); \r",
+											"    pm.expect(store_response).have.property(\"contentType\"); \r",
+											"    pm.expect(store_response).have.property(\"checksum\"); \r",
+											"\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "(Required) The accessToken for the file that was returned during storage",
+										"key": "x-file-access-token",
+										"value": "{{store2_accessToken}}"
+									},
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/file/{{store1_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file",
+										"{{store1_id}}"
+									]
+								},
+								"description": "Deletes a file from the storage service."
+							},
+							"response": []
+						},
+						{
+							"name": "Store3",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"accessToken\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"itemName\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"    pm.expect(store_response.version).to.eql(1);\r",
+											"    \r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello.txt"
+										},
+										{
+											"key": "itemName",
+											"value": "store_ver",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "storageGroup",
+											"value": "Aws",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "targetApplicationName",
+											"value": "Connect",
+											"type": "text"
+										},
+										{
+											"key": "targetReferenceId",
+											"value": "{{$guid}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file?force=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file"
+									],
+									"query": [
+										{
+											"key": "force",
+											"value": "true",
+											"description": "If true then this file will be updated even if it still matches the original."
+										}
+									]
+								},
+								"description": "Stores a file into the storage service"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Store-true",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Validate Status Code is 200\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(store_response).have.property(\"id\");\r",
+									"    pm.expect(store_response).have.property(\"accessToken\");\r",
+									"    pm.expect(store_response).have.property(\"group\");\r",
+									"    pm.expect(store_response).have.property(\"itemName\");\r",
+									"    pm.expect(store_response).have.property(\"version\");\r",
+									"    pm.expect(store_response).have.property(\"checksum\");\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								},
+								{
+									"key": "itemName",
+									"value": "Swagger_file",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text"
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "true",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Store-false",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate Status Code is 304\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(304);\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								},
+								{
+									"key": "itemName",
+									"value": "Swagger_file",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text"
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "false",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Header - Uncheck x-client-reference-id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"invalidData\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"x-client-reference-id header must be set\"); \r",
+									"    \r",
+									"   \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia",
+								"disabled": true
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								},
+								{
+									"key": "itemName",
+									"value": "Swagger_file",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text"
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "true",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Header - Uncheck x-client-app-name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\").is.to.equal(\"x-client-app-name header must be set\"); \r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								},
+								{
+									"key": "itemName",
+									"value": "Swagger_file",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text"
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "true",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Request Body - Uncheck fileData",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\").is.to.equal(\"Incorrect file data submitted for storage. Please submit a single file for upload.\"); \r",
+									"\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "/C:/Users/Mohan/Downloads/image2.png",
+									"disabled": true
+								},
+								{
+									"key": "itemName",
+									"value": "Swagger_file",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text"
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "true",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Request Body - Uncheck itemName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 200\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"invalidData\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"Invalid data - itemName parameter must be set\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								},
+								{
+									"key": "itemName",
+									"value": "Swagger_file",
+									"description": "(Required) ",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text"
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "true",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Requst Body - Uncheck storageGroup - force - true",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"invalidData\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"Invalid data - storageGroup parameter must be set for new data\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								},
+								{
+									"key": "itemName",
+									"value": "{{$guid}}",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text"
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "true",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Request Body - Uncheck storageGroup - force - false",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate Status Code is 304\", function () {\r",
+									"    pm.response.to.have.status(304);\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								},
+								{
+									"key": "itemName",
+									"value": "Swagger_file",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text"
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "false",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Request Body - Uncheck targetApplicationName with existing itemName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Validate Status Code is 304\", function () {\r",
+									"    pm.response.to.have.status(304);\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								},
+								{
+									"key": "itemName",
+									"value": "Swagger_file",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "false",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Request Body - Uncheck targetReferenceId with existing itemName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate Status Code is 304\", function () {\r",
+									"    pm.response.to.have.status(304);\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								},
+								{
+									"key": "itemName",
+									"value": "Swagger_file",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text"
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "false",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Request Body - Uncheck targetApplicationName with new itemName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 200\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(store_response).have.property(\"id\");\r",
+									"    pm.expect(store_response).have.property(\"accessToken\");\r",
+									"    pm.expect(store_response).have.property(\"group\");\r",
+									"    pm.expect(store_response).have.property(\"itemName\");\r",
+									"    pm.expect(store_response).have.property(\"version\");\r",
+									"    pm.expect(store_response).have.property(\"checksum\");\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								},
+								{
+									"key": "itemName",
+									"value": "Swagger_file",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "true",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Request Body - Uncheck targetReferenceId with new itemName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 200\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(store_response).have.property(\"id\");\r",
+									"    pm.expect(store_response).have.property(\"accessToken\");\r",
+									"    pm.expect(store_response).have.property(\"group\");\r",
+									"    pm.expect(store_response).have.property(\"itemName\");\r",
+									"    pm.expect(store_response).have.property(\"version\");\r",
+									"    pm.expect(store_response).have.property(\"checksum\");\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								},
+								{
+									"key": "itemName",
+									"value": "Swagger_file",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "true",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Request Body - fileData value is empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"invalidData\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"Incorrect file data submitted for storage. Please submit a single file for upload.\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "itemName",
+									"value": "Swagger_file",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text"
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "false",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Request Body - itemName value is empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"invalidData\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"Invalid data - itemName parameter must be set\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								},
+								{
+									"key": "itemName",
+									"value": "",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text"
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "false",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patch",
+			"item": [
+				{
+					"name": "Patch - Invalid File Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"invalidData\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"Incorrect file data submitted for storage. Please submit a single file for upload.\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "Ut est cillum"
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"value": "enim voluptate",
+									"description": "(Required) ",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageId"
+							],
+							"variable": [
+								{
+									"key": "storageId",
+									"value": null
+								}
+							]
+						},
+						"description": "Updates a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Patch - Uncheck fileData",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"unknownError\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"Multipart: Boundary not found\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "Ut est cillum officia4d30ed62a82d287cc8e6689aba787ba0c056599f9c01322dcefd3132c3bb3a2450e1028bd96174f2477e31606fa25528e87fe1fdc022e12e76be5a1e1613b769"
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"value": "enim voluptate",
+									"description": "(Required) ",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageDataId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageDataId"
+							],
+							"variable": [
+								{
+									"key": "storageDataId",
+									"value": null
+								}
+							]
+						},
+						"description": "Updates a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Patch -  Invalid Storage Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"notFound\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"No metadata found for :storageDataId\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "Ut est cillum officia4d30ed62a82d287cc8e6689aba787ba0c056599f9c01322dcefd3132c3bb3a2450e1028bd96174f2477e31606fa25528e87fe1fdc022e12e76be5a1e1613b769"
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageDataId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageDataId"
+							],
+							"variable": [
+								{
+									"key": "storageDataId",
+									"value": null
+								}
+							]
+						},
+						"description": "Updates a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Patch -  Header - x-file-access-token value empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"unauthorized\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"No file accessToken provided\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": ""
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageDataId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageDataId"
+							],
+							"variable": [
+								{
+									"key": "storageDataId",
+									"value": null
+								}
+							]
+						},
+						"description": "Updates a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Patch -  Uncheck  header - x-file-access-token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"unauthorized\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"No file accessToken provided\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "Ut est cillum officia4d30ed62a82d287cc8e6689aba787ba0c056599f9c01322dcefd3132c3bb3a2450e1028bd96174f2477e31606fa25528e87fe1fdc022e12e76be5a1e1613b769",
+								"disabled": true
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageDataId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageDataId"
+							],
+							"variable": [
+								{
+									"key": "storageDataId",
+									"value": null
+								}
+							]
+						},
+						"description": "Updates a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Patch - Uncheck header - x-client-reference-id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"invalidData\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"x-client-reference-id header must be set\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "Ut est cillum officia4d30ed62a82d287cc8e6689aba787ba0c056599f9c01322dcefd3132c3bb3a2450e1028bd96174f2477e31606fa25528e87fe1fdc022e12e76be5a1e1613b769"
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia",
+								"disabled": true
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageDataId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageDataId"
+							],
+							"variable": [
+								{
+									"key": "storageDataId",
+									"value": null
+								}
+							]
+						},
+						"description": "Updates a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Patch - Header - x-client-reference-id value empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"invalidData\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"x-client-reference-id header must be set\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "Ut est cillum officia4d30ed62a82d287cc8e6689aba787ba0c056599f9c01322dcefd3132c3bb3a2450e1028bd96174f2477e31606fa25528e87fe1fdc022e12e76be5a1e1613b769"
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": ""
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageDataId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageDataId"
+							],
+							"variable": [
+								{
+									"key": "storageDataId",
+									"value": null
+								}
+							]
+						},
+						"description": "Updates a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Patch - Uncheck header - x-client-app-name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"invalidData\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"x-client-app-name header must be set\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "Ut est cillum officia4d30ed62a82d287cc8e6689aba787ba0c056599f9c01322dcefd3132c3bb3a2450e1028bd96174f2477e31606fa25528e87fe1fdc022e12e76be5a1e1613b769"
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageDataId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageDataId"
+							],
+							"variable": [
+								{
+									"key": "storageDataId",
+									"value": null
+								}
+							]
+						},
+						"description": "Updates a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Patch - Header -x-client-app-name value empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"invalidData\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"x-client-app-name header must be set\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "Ut est cillum officia4d30ed62a82d287cc8e6689aba787ba0c056599f9c01322dcefd3132c3bb3a2450e1028bd96174f2477e31606fa25528e87fe1fdc022e12e76be5a1e1613b769"
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageDataId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageDataId"
+							],
+							"variable": [
+								{
+									"key": "storageDataId",
+									"value": null
+								}
+							]
+						},
+						"description": "Updates a file into the storage service"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GetDownload",
+			"item": [
+				{
+					"name": "Header - Uncheck x-client-app-name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"invalidData\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"x-client-app-name header must be set\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "4d0fce17499e34c3cc4fdb604fdefd240f6a79dbb922e88cb64f58aee5a52f645ae798e99f4f88dbb25fc57ee70e75f82aa91e60f0d1cafe5ff0185d4f75940e"
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageDataId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageDataId"
+							],
+							"variable": [
+								{
+									"key": "storageDataId",
+									"value": null
+								}
+							]
+						},
+						"description": "Download a file from the storage service."
+					},
+					"response": []
+				},
+				{
+					"name": "Header - Uncheck x-client-reference-id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"invalidData\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"x-client-reference-id header must be set\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "4d0fce17499e34c3cc4fdb604fdefd240f6a79dbb922e88cb64f58aee5a52f645ae798e99f4f88dbb25fc57ee70e75f82aa91e60f0d1cafe5ff0185d4f75940e"
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia",
+								"disabled": true
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageDataId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageDataId"
+							],
+							"variable": [
+								{
+									"key": "storageDataId",
+									"value": null
+								}
+							]
+						},
+						"description": "Download a file from the storage service."
+					},
+					"response": []
+				},
+				{
+					"name": "Header - Uncheck x-file-access-token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"unauthorized\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"No file accessToken provided\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "4d0fce17499e34c3cc4fdb604fdefd240f6a79dbb922e88cb64f58aee5a52f645ae798e99f4f88dbb25fc57ee70e75f82aa91e60f0d1cafe5ff0185d4f75940e",
+								"disabled": true
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageDataId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageDataId"
+							],
+							"variable": [
+								{
+									"key": "storageDataId",
+									"value": null
+								}
+							]
+						},
+						"description": "Download a file from the storage service."
+					},
+					"response": []
+				},
+				{
+					"name": "Header - x-client-app-name - value empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"invalidData\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"x-client-app-name header must be set\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "4d0fce17499e34c3cc4fdb604fdefd240f6a79dbb922e88cb64f58aee5a52f645ae798e99f4f88dbb25fc57ee70e75f82aa91e60f0d1cafe5ff0185d4f75940e"
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": ""
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageDataId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageDataId"
+							],
+							"variable": [
+								{
+									"key": "storageDataId",
+									"value": null
+								}
+							]
+						},
+						"description": "Download a file from the storage service."
+					},
+					"response": []
+				},
+				{
+					"name": "Header - x-client-reference-id  - value empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"invalidData\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"x-client-reference-id header must be set\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "4d0fce17499e34c3cc4fdb604fdefd240f6a79dbb922e88cb64f58aee5a52f645ae798e99f4f88dbb25fc57ee70e75f82aa91e60f0d1cafe5ff0185d4f75940e"
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": ""
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageDataId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageDataId"
+							],
+							"variable": [
+								{
+									"key": "storageDataId",
+									"value": null
+								}
+							]
+						},
+						"description": "Download a file from the storage service."
+					},
+					"response": []
+				},
+				{
+					"name": "Header - x-file-access-token - value empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"unauthorized\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"No file accessToken provided\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": ""
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageDataId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageDataId"
+							],
+							"variable": [
+								{
+									"key": "storageDataId",
+									"value": null
+								}
+							]
+						},
+						"description": "Download a file from the storage service."
+					},
+					"response": []
+				},
+				{
+					"name": "Storage id with invalid id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"notFound\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"No metadata found for :storageDataId\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "4d0fce17499e34c3cc4fdb604fdefd240f6a79dbb922e88cb64f58aee5a52f645ae798e99f4f88dbb25fc57ee70e75f82aa91e60f0d1cafe5ff0185d4f75940e"
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageDataId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageDataId"
+							],
+							"variable": [
+								{
+									"key": "storageDataId",
+									"value": null
+								}
+							]
+						},
+						"description": "Download a file from the storage service."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GetInfo",
+			"item": [
+				{
+					"name": "Info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response.errorCode).to.eql(\"notFound\");\r",
+									"    pm.expect(store_response.errorMessage).to.eql(\"No metadata found for invalidstorageDataId\")\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file/invalidstorageDataId/info",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								"invalidstorageDataId",
+								"info"
+							]
+						},
+						"description": "Get the latest known metadata information of a stored file."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DeleteFile",
+			"item": [
+				{
+					"name": "Header - Uncheck x-client-app-name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response).have.property(\"errorCode\").is.to.equal(\"invalidData\"); \r",
+									"    pm.expect(store_response).have.property(\"errorMessage\").is.to.equal(\"x-client-app-name header must be set\"); \r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageId"
+							],
+							"variable": [
+								{
+									"key": "storageId",
+									"value": null
+								}
+							]
+						},
+						"description": "Deletes a file from the storage service."
+					},
+					"response": []
+				},
+				{
+					"name": "Header - x-client-app-name - value empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response).have.property(\"errorCode\").is.to.equal(\"invalidData\"); \r",
+									"    pm.expect(store_response).have.property(\"errorMessage\").is.to.equal(\"x-client-app-name header must be set\"); \r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": ""
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageId"
+							],
+							"variable": [
+								{
+									"key": "storageId",
+									"value": null
+								}
+							]
+						},
+						"description": "Deletes a file from the storage service."
+					},
+					"response": []
+				},
+				{
+					"name": "Header - Uncheck x-client-reference-id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response).have.property(\"errorCode\").is.to.equal(\"invalidData\"); \r",
+									"    pm.expect(store_response).have.property(\"errorMessage\").is.to.equal(\"x-client-reference-id header must be set\"); \r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia",
+								"disabled": true
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageId"
+							],
+							"variable": [
+								{
+									"key": "storageId",
+									"value": null
+								}
+							]
+						},
+						"description": "Deletes a file from the storage service."
+					},
+					"response": []
+				},
+				{
+					"name": "Header - x-client-reference-id  - value empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 422\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(422);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response).have.property(\"errorCode\").is.to.equal(\"invalidData\"); \r",
+									"    pm.expect(store_response).have.property(\"errorMessage\").is.to.equal(\"x-client-reference-id header must be set\"); \r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": ""
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageId"
+							],
+							"variable": [
+								{
+									"key": "storageId",
+									"value": null
+								}
+							]
+						},
+						"description": "Deletes a file from the storage service."
+					},
+					"response": []
+				},
+				{
+					"name": "Header - Uncheck x-file-access-token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 401\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(401);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response).have.property(\"errorCode\").is.to.equal(\"unauthorized\"); \r",
+									"    pm.expect(store_response).have.property(\"errorMessage\").is.to.equal(\"No file accessToken provided\"); \r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": "Ut est cillum officia",
+								"disabled": true
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageId"
+							],
+							"variable": [
+								{
+									"key": "storageId",
+									"value": null
+								}
+							]
+						},
+						"description": "Deletes a file from the storage service."
+					},
+					"response": []
+				},
+				{
+					"name": "Header - x-file-access-token - value empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 401\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(401);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response).have.property(\"errorCode\").is.to.equal(\"unauthorized\"); \r",
+									"    pm.expect(store_response).have.property(\"errorMessage\").is.to.equal(\"No file accessToken provided\"); \r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"description": "(Required) The accessToken for the file that was returned during storage",
+								"key": "x-file-access-token",
+								"value": ""
+							},
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/file/:storageId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":storageId"
+							],
+							"variable": [
+								{
+									"key": "storageId",
+									"value": null
+								}
+							]
+						},
+						"description": "Deletes a file from the storage service."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GetCompare",
+			"item": [
+				{
+					"name": "Invalid Storageid and Invalid Version",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 404\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(404);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response).have.property(\"errorCode\").is.to.equal(\"notFound\"); \r",
+									"    pm.expect(store_response).have.property(\"errorMessage\").is.to.equal(\"No metadata found for invalid\"); \r",
+									"\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/file/invalid/compare/version/invalid",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								"invalid",
+								"compare",
+								"version",
+								"invalid"
+							]
+						},
+						"description": "Compares the version given to that of the currently stored file for a storage id. If there has been any updates to the file then\nthe new file information will be returned. Otherwise this method will return a 304 status code response."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GetCompareChecksum",
+			"item": [
+				{
+					"name": "Invalid Storageid and Invalid Version",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 404\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(404);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response).have.property(\"errorCode\").is.to.equal(\"notFound\"); \r",
+									"    pm.expect(store_response).have.property(\"errorMessage\").is.to.equal(\"No metadata found for invalid\"); \r",
+									"\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/file/invalid/compare/checksum/invalid",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								"invalid",
+								"compare",
+								"checksum",
+								"invalid"
+							]
+						},
+						"description": "Compares the checksum given to that of the currently stored file for a storage id. If there has been any updates to the file then\nthe new file information will be returned. Otherwise this method will return a 304 status code response."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhY2NvdW50SWQiOiAiY29ubmVjdC1xYSIsICJhcGlUb2tlbiI6ICIkMSRUNVpQTWY5YjdFdFYzKmowSlE4OXExMkBFN0BjQylCWU9zKk5HMXAqNEBabVFYQTljRyo4YnRjTGlCcUNPIn0=",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "storageId",
+			"value": ""
+		},
+		{
+			"key": "storageAccessToken",
+			"value": ""
+		},
+		{
+			"key": "storageChecksum",
+			"value": ""
+		},
+		{
+			"key": "store1_id",
+			"value": ""
+		},
+		{
+			"key": "store1_accessToken",
+			"value": ""
+		},
+		{
+			"key": "store2_accessToken",
+			"value": ""
+		},
+		{
+			"key": "store2",
+			"value": "",
+			"disabled": true
+		}
+	]
+}
