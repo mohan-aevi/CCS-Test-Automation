@@ -794,7 +794,6 @@
 									"script": {
 										"exec": [
 											"\r",
-											"\r",
 											"const store_response = pm.response.json();\r",
 											"pm.test(\"Validate Status Code is 200\", function()\r",
 											"{\r",
@@ -2257,6 +2256,571 @@
 			"name": "Patch",
 			"item": [
 				{
+					"name": "Patch - Same File",
+					"item": [
+						{
+							"name": "Store",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.collectionVariables.set(\"patch_store_id\",store_response.id);\r",
+											"pm.collectionVariables.set(\"patch_store-file-access-token\",store_response.accessToken);\r",
+											"\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"accessToken\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"itemName\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello.txt"
+										},
+										{
+											"key": "itemName",
+											"value": "Swagger_file_patch",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "storageGroup",
+											"value": "Aws",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "targetApplicationName",
+											"value": "Connect",
+											"type": "text"
+										},
+										{
+											"key": "targetReferenceId",
+											"value": "{{$guid}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file?force=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file"
+									],
+									"query": [
+										{
+											"key": "force",
+											"value": "true",
+											"description": "If true then this file will be updated even if it still matches the original."
+										}
+									]
+								},
+								"description": "Stores a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Store",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Validate Status Code is 304\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(304);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"description": "(Required) The accessToken for the file that was returned during storage",
+										"key": "x-file-access-token",
+										"value": "{{patch_store-file-access-token}}"
+									},
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello.txt"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file/{{patch_store_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file",
+										"{{patch_store_id}}"
+									]
+								},
+								"description": "Updates a file into the storage service"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Patch - After one patch",
+					"item": [
+						{
+							"name": "Store",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.collectionVariables.set(\"patch_store_id\",store_response.id);\r",
+											"pm.collectionVariables.set(\"patch_store-file-access-token\",store_response.accessToken);\r",
+											"\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"accessToken\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"itemName\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello.txt"
+										},
+										{
+											"key": "itemName",
+											"value": "Swagger_file_patch_2",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "storageGroup",
+											"value": "Aws",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "targetApplicationName",
+											"value": "Connect",
+											"type": "text"
+										},
+										{
+											"key": "targetReferenceId",
+											"value": "{{$guid}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file?force=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file"
+									],
+									"query": [
+										{
+											"key": "force",
+											"value": "true",
+											"description": "If true then this file will be updated even if it still matches the original."
+										}
+									]
+								},
+								"description": "Stores a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Store1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"description": "(Required) The accessToken for the file that was returned during storage",
+										"key": "x-file-access-token",
+										"value": "{{patch_store-file-access-token}}"
+									},
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello1.txt"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file/{{patch_store_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file",
+										"{{patch_store_id}}"
+									]
+								},
+								"description": "Updates a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Store2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Validate Status Code is 401\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"description": "(Required) The accessToken for the file that was returned during storage",
+										"key": "x-file-access-token",
+										"value": "{{patch_store-file-access-token}}"
+									},
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello1.txt"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file/{{patch_store_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file",
+										"{{patch_store_id}}"
+									]
+								},
+								"description": "Updates a file into the storage service"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Patch - File - Success",
+					"item": [
+						{
+							"name": "Store",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.collectionVariables.set(\"patch_store_id\",store_response.id);\r",
+											"pm.collectionVariables.set(\"patch_store-file-access-token\",store_response.accessToken);\r",
+											"\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"accessToken\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"itemName\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello.txt"
+										},
+										{
+											"key": "itemName",
+											"value": "Swagger_file_patch_3",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "storageGroup",
+											"value": "Aws",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "targetApplicationName",
+											"value": "Connect",
+											"type": "text"
+										},
+										{
+											"key": "targetReferenceId",
+											"value": "{{$guid}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file?force=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file"
+									],
+									"query": [
+										{
+											"key": "force",
+											"value": "true",
+											"description": "If true then this file will be updated even if it still matches the original."
+										}
+									]
+								},
+								"description": "Stores a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Store",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"description": "(Required) The accessToken for the file that was returned during storage",
+										"key": "x-file-access-token",
+										"value": "{{patch_store-file-access-token}}"
+									},
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello1.txt"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file/{{patch_store_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file",
+										"{{patch_store_id}}"
+									]
+								},
+								"description": "Updates a file into the storage service"
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Patch - Invalid File Data",
 					"event": [
 						{
@@ -2942,6 +3506,158 @@
 			"name": "GetDownload",
 			"item": [
 				{
+					"name": "GetDownload with StorageId",
+					"item": [
+						{
+							"name": "Store",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.collectionVariables.set(\"download_store_id\",store_response.id);\r",
+											"pm.collectionVariables.set(\"download_store-file-access-token\",store_response.accessToken);\r",
+											"\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"accessToken\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"itemName\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello.txt"
+										},
+										{
+											"key": "itemName",
+											"value": "Store_download_file",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "storageGroup",
+											"value": "Aws",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "targetApplicationName",
+											"value": "Connect",
+											"type": "text"
+										},
+										{
+											"key": "targetReferenceId",
+											"value": "{{$guid}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file?force=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file"
+									],
+									"query": [
+										{
+											"key": "force",
+											"value": "true",
+											"description": "If true then this file will be updated even if it still matches the original."
+										}
+									]
+								},
+								"description": "Stores a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "GetDownload-store-file",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "(Required) The accessToken for the file that was returned during storage",
+										"key": "x-file-access-token",
+										"value": "{{download_store-file-access-token}}"
+									},
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/file/{{download_store_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file",
+										"{{download_store_id}}"
+									]
+								},
+								"description": "Download a file from the storage service."
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Header - Uncheck x-client-app-name",
 					"event": [
 						{
@@ -3370,7 +4086,7 @@
 			"name": "GetInfo",
 			"item": [
 				{
-					"name": "Info",
+					"name": "info - invalid storage id",
 					"event": [
 						{
 							"listen": "test",
@@ -3414,12 +4130,559 @@
 						"description": "Get the latest known metadata information of a stored file."
 					},
 					"response": []
+				},
+				{
+					"name": "Store",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.collectionVariables.set(\"info_store_id\",store_response.id);\r",
+									"pm.collectionVariables.set(\"info_store-file-access-token\",store_response.accessToken);\r",
+									"pm.collectionVariables.set(\"info_group\",store_response.group);\r",
+									"pm.collectionVariables.set(\"info_itemName\",store_response.itemName);\r",
+									"pm.collectionVariables.set(\"info_version\",store_response.version);\r",
+									"pm.collectionVariables.set(\"info_checksum\",store_response.checksum);\r",
+									"\r",
+									"pm.test(\"Validate Status Code is 200\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(store_response).have.property(\"id\");\r",
+									"    pm.expect(store_response).have.property(\"accessToken\");\r",
+									"    pm.expect(store_response).have.property(\"group\");\r",
+									"    pm.expect(store_response).have.property(\"itemName\");\r",
+									"    pm.expect(store_response).have.property(\"version\");\r",
+									"    pm.expect(store_response).have.property(\"checksum\");\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								},
+								{
+									"key": "itemName",
+									"value": "Store_info_file",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text"
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "true",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Info  valid storage id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(store_response).have.property(\"id\");\r",
+									"    pm.expect(store_response).have.property(\"group\");\r",
+									"    // Issue exisisting as there is not item name displayed in the response - https://jira.aevi.com/browse/CONNECT-264\r",
+									"    // pm.expect(store_response).have.property(\"itemName\");\r",
+									"    pm.expect(store_response).have.property(\"version\");\r",
+									"    pm.expect(store_response).have.property(\"checksum\");\r",
+									"    pm.expect(store_response).have.property(\"lastUpdateDateTime\");\r",
+									"    pm.expect(store_response).have.property(\"contentType\");\r",
+									"\r",
+									"    pm.expect(store_response).have.property(\"id\").is.to.equal(pm.collectionVariables.get(\"info_store_id\"));\r",
+									"    pm.expect(store_response).have.property(\"group\").is.to.equal(pm.collectionVariables.get(\"info_group\"));\r",
+									"    // pm.expect(store_response).have.property(\"itemName\").is.to.equal(pm.collectionVariables.get(\"info_itemName\"));\r",
+									"\r",
+									"    pm.expect(store_response).have.property(\"version\").is.to.equal(pm.collectionVariables.get(\"info_version\"));\r",
+									"    pm.expect(store_response).have.property(\"checksum\").is.to.equal(pm.collectionVariables.get(\"info_checksum\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file/{{info_store_id}}/info",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								"{{info_store_id}}",
+								"info"
+							]
+						},
+						"description": "Get the latest known metadata information of a stored file."
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "DeleteFile",
 			"item": [
+				{
+					"name": "Delete - StoreFile",
+					"item": [
+						{
+							"name": "Store",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.collectionVariables.set(\"delete_store_id\",store_response.id);\r",
+											"pm.collectionVariables.set(\"delete_store-file-access-token\",store_response.accessToken);\r",
+											"pm.collectionVariables.set(\"delete_version\",store_response.version);\r",
+											"pm.collectionVariables.set(\"delete_group\",store_response.group);\r",
+											"pm.collectionVariables.set(\"delete_checksum\",store_response.checksum);\r",
+											"\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"accessToken\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"itemName\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello.txt"
+										},
+										{
+											"key": "itemName",
+											"value": "Store_download_file",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "storageGroup",
+											"value": "Aws",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "targetApplicationName",
+											"value": "Connect",
+											"type": "text"
+										},
+										{
+											"key": "targetReferenceId",
+											"value": "{{$guid}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file?force=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file"
+									],
+									"query": [
+										{
+											"key": "force",
+											"value": "true",
+											"description": "If true then this file will be updated even if it still matches the original."
+										}
+									]
+								},
+								"description": "Stores a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete File",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.test(\"Validate Status Code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"lastUpdateDateTime\");\r",
+											"    pm.expect(store_response).have.property(\"contentType\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"    pm.expect(store_response.id).to.eql(pm.collectionVariables.get(\"delete_store_id\"));\r",
+											"    pm.expect(store_response.group).to.eql(pm.collectionVariables.get(\"delete_group\"));\r",
+											"     pm.expect(store_response.version).to.eql(pm.collectionVariables.get(\"delete_version\"));\r",
+											"      pm.expect(store_response.checksum).to.eql(pm.collectionVariables.get(\"delete_checksum\"));\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "(Required) The accessToken for the file that was returned during storage",
+										"key": "x-file-access-token",
+										"value": "{{delete_store-file-access-token}}"
+									},
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/file/{{delete_store_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file",
+										"{{delete_store_id}}"
+									]
+								},
+								"description": "Deletes a file from the storage service."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete - Delete with same valid Id after first delete",
+					"item": [
+						{
+							"name": "Store",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.collectionVariables.set(\"delete_store_id\",store_response.id);\r",
+											"pm.collectionVariables.set(\"delete_store-file-access-token\",store_response.accessToken);\r",
+											"pm.collectionVariables.set(\"delete_version\",store_response.version);\r",
+											"pm.collectionVariables.set(\"delete_group\",store_response.group);\r",
+											"pm.collectionVariables.set(\"delete_checksum\",store_response.checksum);\r",
+											"\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"accessToken\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"itemName\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello.txt"
+										},
+										{
+											"key": "itemName",
+											"value": "Store_download_file",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "storageGroup",
+											"value": "Aws",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "targetApplicationName",
+											"value": "Connect",
+											"type": "text"
+										},
+										{
+											"key": "targetReferenceId",
+											"value": "{{$guid}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file?force=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file"
+									],
+									"query": [
+										{
+											"key": "force",
+											"value": "true",
+											"description": "If true then this file will be updated even if it still matches the original."
+										}
+									]
+								},
+								"description": "Stores a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete File",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.test(\"Validate Status Code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"lastUpdateDateTime\");\r",
+											"    pm.expect(store_response).have.property(\"contentType\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"    pm.expect(store_response.id).to.eql(pm.collectionVariables.get(\"delete_store_id\"));\r",
+											"    pm.expect(store_response.group).to.eql(pm.collectionVariables.get(\"delete_group\"));\r",
+											"     pm.expect(store_response.version).to.eql(pm.collectionVariables.get(\"delete_version\"));\r",
+											"      pm.expect(store_response.checksum).to.eql(pm.collectionVariables.get(\"delete_checksum\"));\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "(Required) The accessToken for the file that was returned during storage",
+										"key": "x-file-access-token",
+										"value": "{{delete_store-file-access-token}}"
+									},
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/file/{{delete_store_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file",
+										"{{delete_store_id}}"
+									]
+								},
+								"description": "Deletes a file from the storage service."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete File  twice",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.test(\"Validate Status Code is 404\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(404);\r",
+											"    pm.expect(store_response).have.property(\"errorCode\");\r",
+											"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+											"    pm.expect(store_response).have.property(\"errorCode\").is.to.equal(\"notFound\"); \r",
+											"    delete_store_id = pm.collectionVariables.get(\"delete_store_id\");\r",
+											"    error_message = \"No metadata found for \" + delete_store_id;\r",
+											"    pm.expect(store_response).have.property(\"errorMessage\").is.to.equal(error_message); \r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "(Required) The accessToken for the file that was returned during storage",
+										"key": "x-file-access-token",
+										"value": "{{delete_store-file-access-token}}"
+									},
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/file/{{delete_store_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file",
+										"{{delete_store_id}}"
+									]
+								},
+								"description": "Deletes a file from the storage service."
+							},
+							"response": []
+						}
+					]
+				},
 				{
 					"name": "Header - Uncheck x-client-app-name",
 					"event": [
@@ -3799,6 +5062,259 @@
 			"name": "GetCompare",
 			"item": [
 				{
+					"name": "Store",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.collectionVariables.set(\"GetCompare_store_id\",store_response.id);\r",
+									"pm.collectionVariables.set(\"GetCompare_version\",store_response.version);\r",
+									"\r",
+									"pm.test(\"Validate Status Code is 200\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(store_response).have.property(\"id\");\r",
+									"    pm.expect(store_response).have.property(\"accessToken\");\r",
+									"    pm.expect(store_response).have.property(\"group\");\r",
+									"    pm.expect(store_response).have.property(\"itemName\");\r",
+									"    pm.expect(store_response).have.property(\"version\");\r",
+									"    pm.expect(store_response).have.property(\"checksum\");\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								},
+								{
+									"key": "itemName",
+									"value": "GetCompare_store",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text"
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "true",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "Valid Storageid and Valid Version",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate Status Code is 304\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(304);\r",
+									"});\r",
+									"\r",
+									"// https://jira.aevi.com/browse/CONNECT-265 - issue exists, once it is fixed - automation scoope to be extended for this request"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/file/{{GetCompare_store_id}}/compare/version/{{GetCompare_version}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								"{{GetCompare_store_id}}",
+								"compare",
+								"version",
+								"{{GetCompare_version}}"
+							]
+						},
+						"description": "Compares the version given to that of the currently stored file for a storage id. If there has been any updates to the file then\nthe new file information will be returned. Otherwise this method will return a 304 status code response."
+					},
+					"response": []
+				},
+				{
+					"name": "Valid Storageid and invalid Version",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate Status Code is 200\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/file/{{GetCompare_store_id}}/compare/version/invalid",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								"{{GetCompare_store_id}}",
+								"compare",
+								"version",
+								"invalid"
+							]
+						},
+						"description": "Compares the version given to that of the currently stored file for a storage id. If there has been any updates to the file then\nthe new file information will be returned. Otherwise this method will return a 304 status code response."
+					},
+					"response": []
+				},
+				{
+					"name": "Valid Storageid and no Version given",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate Status Code is 200\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// issue exists - once the fix is provided , test should be extended according to the error messages"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/file/{{GetCompare_store_id}}/compare/version/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								"{{GetCompare_store_id}}",
+								"compare",
+								"version",
+								""
+							]
+						},
+						"description": "Compares the version given to that of the currently stored file for a storage id. If there has been any updates to the file then\nthe new file information will be returned. Otherwise this method will return a 304 status code response."
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Storageid and valid version",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 404\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(404);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response).have.property(\"errorCode\").is.to.equal(\"notFound\"); \r",
+									"    pm.expect(store_response).have.property(\"errorMessage\").is.to.equal(\"No metadata found for invalid\"); \r",
+									"\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/file/invalid/compare/version/{{GetCompare_version}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								"invalid",
+								"compare",
+								"version",
+								"{{GetCompare_version}}"
+							]
+						},
+						"description": "Compares the version given to that of the currently stored file for a storage id. If there has been any updates to the file then\nthe new file information will be returned. Otherwise this method will return a 304 status code response."
+					},
+					"response": []
+				},
+				{
 					"name": "Invalid Storageid and Invalid Version",
 					"event": [
 						{
@@ -3948,9 +5464,76 @@
 			"value": ""
 		},
 		{
-			"key": "store2",
-			"value": "",
-			"disabled": true
+			"key": "patch_store-file-access-token",
+			"value": ""
+		},
+		{
+			"key": "patch_store_id",
+			"value": ""
+		},
+		{
+			"key": "download_store_id",
+			"value": ""
+		},
+		{
+			"key": "download_store-file-access-token",
+			"value": ""
+		},
+		{
+			"key": "delete_store_id",
+			"value": ""
+		},
+		{
+			"key": "delete_store-file-access-token",
+			"value": ""
+		},
+		{
+			"key": "delete_version",
+			"value": ""
+		},
+		{
+			"key": "delete_checksum",
+			"value": ""
+		},
+		{
+			"key": "delete_group",
+			"value": ""
+		},
+		{
+			"key": "info_store_id",
+			"value": ""
+		},
+		{
+			"key": "info_group",
+			"value": ""
+		},
+		{
+			"key": "info_itemName",
+			"value": ""
+		},
+		{
+			"key": "info_version",
+			"value": ""
+		},
+		{
+			"key": "info_checksum",
+			"value": ""
+		},
+		{
+			"key": "info_store-file-access-token",
+			"value": ""
+		},
+		{
+			"key": "info_itemName",
+			"value": ""
+		},
+		{
+			"key": "GetCompare_store_id",
+			"value": ""
+		},
+		{
+			"key": "GetCompare_version",
+			"value": ""
 		}
 	]
 }
