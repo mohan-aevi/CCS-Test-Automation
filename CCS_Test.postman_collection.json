@@ -2524,7 +2524,7 @@
 							"response": []
 						},
 						{
-							"name": "Update Store1",
+							"name": "Update Store1 Copy",
 							"event": [
 								{
 									"listen": "test",
@@ -3649,6 +3649,224 @@
 									"path": [
 										"file",
 										"{{download_store_id}}"
+									]
+								},
+								"description": "Download a file from the storage service."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GetDownload after patch",
+					"item": [
+						{
+							"name": "Store",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.collectionVariables.set(\"getdownload_store_id\",store_response.id);\r",
+											"pm.collectionVariables.set(\"get_store_file_access_token\",store_response.accessToken);\r",
+											"\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"accessToken\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"itemName\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello.txt"
+										},
+										{
+											"key": "itemName",
+											"value": "GetDownloadStore",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "storageGroup",
+											"value": "Aws",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "targetApplicationName",
+											"value": "Connect",
+											"type": "text"
+										},
+										{
+											"key": "targetReferenceId",
+											"value": "{{$guid}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file?force=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file"
+									],
+									"query": [
+										{
+											"key": "force",
+											"value": "true",
+											"description": "If true then this file will be updated even if it still matches the original."
+										}
+									]
+								},
+								"description": "Stores a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.collectionVariables.set(\"get_patch_file_access_token\",response.accessToken);\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"description": "(Required) The accessToken for the file that was returned during storage",
+										"key": "x-file-access-token",
+										"value": "{{get_store_file_access_token}}"
+									},
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello1.txt"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file/{{getdownload_store_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file",
+										"{{getdownload_store_id}}"
+									]
+								},
+								"description": "Updates a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "GetDownload-after patch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "(Required) The accessToken for the file that was returned during storage",
+										"key": "x-file-access-token",
+										"value": "{{get_patch_file_access_token}}"
+									},
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/file/{{getdownload_store_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file",
+										"{{getdownload_store_id}}"
 									]
 								},
 								"description": "Download a file from the storage service."
@@ -5234,7 +5452,7 @@
 					"response": []
 				},
 				{
-					"name": "Valid Storageid and no Version given",
+					"name": "Valid Storageid and no Version",
 					"event": [
 						{
 							"listen": "test",
@@ -5363,7 +5581,383 @@
 			"name": "GetCompareChecksum",
 			"item": [
 				{
-					"name": "Invalid Storageid and Invalid Version",
+					"name": "Verify Checksum after Update",
+					"item": [
+						{
+							"name": "Store",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const store_response = pm.response.json();\r",
+											"pm.collectionVariables.set(\"checksum_store_id\",store_response.id);\r",
+											"pm.collectionVariables.set(\"checksum_store_file_access_token\",store_response.accessToken);\r",
+											"pm.collectionVariables.set(\"compare_checksum\",store_response.checksum);\r",
+											"\r",
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(store_response).have.property(\"id\");\r",
+											"    pm.expect(store_response).have.property(\"accessToken\");\r",
+											"    pm.expect(store_response).have.property(\"group\");\r",
+											"    pm.expect(store_response).have.property(\"itemName\");\r",
+											"    pm.expect(store_response).have.property(\"version\");\r",
+											"    pm.expect(store_response).have.property(\"checksum\");\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello.txt"
+										},
+										{
+											"key": "itemName",
+											"value": "GetCompareChecksum_store2",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "storageGroup",
+											"value": "Aws",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "targetApplicationName",
+											"value": "Connect",
+											"type": "text"
+										},
+										{
+											"key": "targetReferenceId",
+											"value": "{{$guid}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file?force=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file"
+									],
+									"query": [
+										{
+											"key": "force",
+											"value": "true",
+											"description": "If true then this file will be updated even if it still matches the original."
+										}
+									]
+								},
+								"description": "Stores a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"description": "(Required) The accessToken for the file that was returned during storage",
+										"key": "x-file-access-token",
+										"value": "{{checksum_store_file_access_token}}"
+									},
+									{
+										"description": "(Required) A reference id provided of the client using this method.",
+										"key": "x-client-reference-id",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"description": "(Required) The application name of the client using this method.",
+										"key": "x-client-app-name",
+										"value": "Ut est cillum officia"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileData",
+											"description": "(Required) ",
+											"type": "file",
+											"src": "Hello1.txt"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file/{{checksum_store_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file",
+										"{{checksum_store_id}}"
+									]
+								},
+								"description": "Updates a file into the storage service"
+							},
+							"response": []
+						},
+						{
+							"name": "CompareChecksum",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Validate Status Code is 200\", function()\r",
+											"{\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/file/{{checksum_store_id}}/compare/checksum/{{compare_checksum}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file",
+										"{{checksum_store_id}}",
+										"compare",
+										"checksum",
+										"{{compare_checksum}}"
+									]
+								},
+								"description": "Compares the version given to that of the currently stored file for a storage id. If there has been any updates to the file then\nthe new file information will be returned. Otherwise this method will return a 304 status code response."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Store",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.collectionVariables.set(\"GetCompareChecksum_store_id\",store_response.id);\r",
+									"pm.collectionVariables.set(\"GetCompare_Checksum\",store_response.checksum);\r",
+									"\r",
+									"pm.test(\"Validate Status Code is 200\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(store_response).have.property(\"id\");\r",
+									"    pm.expect(store_response).have.property(\"accessToken\");\r",
+									"    pm.expect(store_response).have.property(\"group\");\r",
+									"    pm.expect(store_response).have.property(\"itemName\");\r",
+									"    pm.expect(store_response).have.property(\"version\");\r",
+									"    pm.expect(store_response).have.property(\"checksum\");\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) A reference id provided of the client using this method.",
+								"key": "x-client-reference-id",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"description": "(Required) The application name of the client using this method.",
+								"key": "x-client-app-name",
+								"value": "Ut est cillum officia"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileData",
+									"description": "(Required) ",
+									"type": "file",
+									"src": "Hello.txt"
+								},
+								{
+									"key": "itemName",
+									"value": "GetCompareChecksum_store",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "storageGroup",
+									"value": "Aws",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "targetApplicationName",
+									"value": "Connect",
+									"type": "text"
+								},
+								{
+									"key": "targetReferenceId",
+									"value": "{{$guid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file?force=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "true",
+									"description": "If true then this file will be updated even if it still matches the original."
+								}
+							]
+						},
+						"description": "Stores a file into the storage service"
+					},
+					"response": []
+				},
+				{
+					"name": "No Update to the file",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate Status Code is 304\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(304);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/file/{{GetCompareChecksum_store_id}}/compare/checksum/{{GetCompare_Checksum}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								"{{GetCompareChecksum_store_id}}",
+								"compare",
+								"checksum",
+								"{{GetCompare_Checksum}}"
+							]
+						},
+						"description": "Compares the version given to that of the currently stored file for a storage id. If there has been any updates to the file then\nthe new file information will be returned. Otherwise this method will return a 304 status code response."
+					},
+					"response": []
+				},
+				{
+					"name": "Valid Storageid and no checksum",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate Status Code is 200\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// issue exists - once the fix is provided , test should be extended according to the error messages"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/file/{{GetCompareChecksum_store_id}}/compare/checksum/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								"{{GetCompareChecksum_store_id}}",
+								"compare",
+								"checksum",
+								""
+							]
+						},
+						"description": "Compares the version given to that of the currently stored file for a storage id. If there has been any updates to the file then\nthe new file information will be returned. Otherwise this method will return a 304 status code response."
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Storageid and Invalid Checksum",
 					"event": [
 						{
 							"listen": "test",
@@ -5399,6 +5993,49 @@
 								"compare",
 								"checksum",
 								"invalid"
+							]
+						},
+						"description": "Compares the checksum given to that of the currently stored file for a storage id. If there has been any updates to the file then\nthe new file information will be returned. Otherwise this method will return a 304 status code response."
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Storageid and valid checksum",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const store_response = pm.response.json();\r",
+									"pm.test(\"Validate Status Code is 404\", function()\r",
+									"{\r",
+									"    pm.response.to.have.status(404);\r",
+									"    pm.expect(store_response).have.property(\"errorCode\");\r",
+									"    pm.expect(store_response).have.property(\"errorMessage\");\r",
+									"    pm.expect(store_response).have.property(\"errorCode\").is.to.equal(\"notFound\"); \r",
+									"    pm.expect(store_response).have.property(\"errorMessage\").is.to.equal(\"No metadata found for invalid\"); \r",
+									"\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/file/invalid/compare/checksum/{{GetCompare_Checksum}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								"invalid",
+								"compare",
+								"checksum",
+								"{{GetCompare_Checksum}}"
 							]
 						},
 						"description": "Compares the checksum given to that of the currently stored file for a storage id. If there has been any updates to the file then\nthe new file information will be returned. Otherwise this method will return a 304 status code response."
@@ -5533,6 +6170,42 @@
 		},
 		{
 			"key": "GetCompare_version",
+			"value": ""
+		},
+		{
+			"key": "GetCompareChecksum_store_id",
+			"value": ""
+		},
+		{
+			"key": "GetCompare_Checksum",
+			"value": ""
+		},
+		{
+			"key": "checksum_store_id",
+			"value": ""
+		},
+		{
+			"key": "compare_checksum",
+			"value": ""
+		},
+		{
+			"key": "checksum_store_file_access_token",
+			"value": ""
+		},
+		{
+			"key": "getdownload_store_id",
+			"value": ""
+		},
+		{
+			"key": "get_store_file_access_token",
+			"value": ""
+		},
+		{
+			"key": "get_patch_file_access_token",
+			"value": ""
+		},
+		{
+			"key": "get_store-file-access-token",
 			"value": ""
 		}
 	]
